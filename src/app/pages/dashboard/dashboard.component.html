@@ -1,0 +1,59 @@
+<div class="container-fluid">
+    <div class="row" infiniteScroll
+    [infiniteScrollDistance]="scrollDistance"
+    [infiniteScrollThrottle]="throttle"
+    (scrolled)="onScroll($event)">
+        <div class="col-sm-12 col-md-3">
+            <nb-select placeholder="Status Martial" (selectedChange)="martialSearch($event)" [(ngModel)]="martial">
+                <nb-option value="Menikah">Married</nb-option>
+                <nb-option value="Belum Menikah">Single</nb-option>
+            </nb-select>
+        </div>
+        <div class="col-sm-12 col-md-3">
+            <nb-select placeholder="Gender" (selectedChange)="genderSearch($event)" [(ngModel)]="gender">
+                <nb-option value="PRIA">Male</nb-option>
+                <nb-option value="WANITA">Female</nb-option>
+            </nb-select>
+        </div>
+        <div class="col-sm-12 col-md-3">
+            <nb-select placeholder="Religion" (selectedChange)="agamaSearch($event)" [(ngModel)]="agama">
+                <nb-option value="1">ISLAM</nb-option>
+                <nb-option value="2">PROTESTAN</nb-option>
+                <nb-option value="3">KATOLIK</nb-option>
+                <nb-option value="4">BUDHA</nb-option>
+                <nb-option value="5">HINDU</nb-option>
+            </nb-select>
+        </div>
+        <div class="col-sm-12 col-md-3">
+            <input type="text" nbInput fullWidth placeholder="Place 3 words or more" [(ngModel)]="search" (keyup)="searchfield($event)">
+        </div>
+        <div style="margin-bottom: 70px;"></div>
+            <div class="col-sm-12 col-md-3 search-results" *ngFor="let emp of data" 
+            > 
+                <nb-card accent="info">
+                    <nb-card-header style="display: flex; justify-content: center; align-items: flex-start;">
+                        <img *ngIf="emp.employee_gender === 'PRIA'" src="../../../assets/img/boy.png" style="width: 50%;"/>
+                        <img *ngIf="emp.employee_gender === 'WANITA'" src="../../../assets/img/girl.png" style="width: 50%;"/>
+                    </nb-card-header>
+                    <button style="align-self: flex-end; position: absolute; top: 12;" 
+                    [nbContextMenu]="items"
+                    nbContextMenuTrigger="click"
+                    (contextmenu)="open(emp.employee_id)" 
+                    ghost nbButton><nb-icon icon="more-vertical"></nb-icon></button>
+                    <nb-card-body>
+                        <div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                            <span style="font-weight: bold; font-size: 12px;">{{emp.employee_name}}</span>   
+                            <p id="id_{{emp.employee_id}}" style="display: none;">{{emp.employee_id}}</p>                 
+                            <span style="font-weight: 400;">{{emp.employee_nik}}</span>
+                            <div style="display: flex; flex-direction: row; justify-content: space-around;">
+                                <button nbButton ghost status="primary" (click)="openModals(emp.employee_id)"><nb-icon icon="expand-outline"></nb-icon></button>
+                                <button nbButton ghost status="danger"><nb-icon icon="email-outline"></nb-icon></button>
+                                <button nbButton ghost status="success" nbPopover="{{emp.employee_contact}}" nbPopoverPlacement="bottom"><nb-icon icon="phone-outline"></nb-icon></button>
+                                <button nbButton ghost status="info" nbPopover="{{emp.employee_adress}}" nbPopoverPlacement="bottom"><nb-icon icon="map-outline"></nb-icon></button>
+                            </div>                                     
+                        </div>
+                    </nb-card-body>
+                </nb-card>
+            </div>
+    </div>
+</div>

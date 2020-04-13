@@ -1,0 +1,25 @@
+<nb-card accent="info" style="width: 50%; position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);">
+<nb-card-header style="text-align: center;">SIGN IN</nb-card-header>
+<nb-card-body>
+    <form class="form-horizontal form-material" #f="ngForm" id="loginform" (ngSubmit)="onSubmit(f)">
+        <div style="display: flex; justify-content: center; align-items: center; flex-direction: column;">
+            <input nbInput class="form-control" type="text" placeholder="Email" name="email" ngModel required style="width:100%;">
+            <div style="margin-top: 5px; margin-bottom: 5px;"></div>
+            <input nbInput class="form-control" type="password" placeholder="Password" name="password" ngModel required style="width:100%;">
+            <div style="margin-top: 15px; margin-bottom: 15px;"></div>
+            <span style="padding: 4px; color: red; font-size: 10px; text-align: center;" [hidden]="hide">you have to set Email and Password correctly or you can contact admin for login confirmation</span>
+            <button nbButton hero shape="round" status="primary" style="width: 50%">Login</button>
+            <div style="display: flex; flex-direction:row; width: 100%; margin-top: 10px; justify-content: space-around; align-items: center; cursor: pointer;">
+                <nb-toggle labelPosition="end">Remember Me</nb-toggle>
+                <span style='font-family: Open Sans, sans-serif;
+                font-size: 0.8125rem;
+                font-weight: 600;
+                line-height: 1.5rem;'>Forgot Your Password ?</span>
+            </div>
+        </div>
+    </form>
+</nb-card-body>
+</nb-card>
